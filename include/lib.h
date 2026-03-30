@@ -8,6 +8,7 @@
 
 #define MAX_PACKET_LEN 1400
 #define ROUTER_NUM_INTERFACES 3
+#define ETHERTYPE_IP 0x0800	/* IP protocol */
 
 
 /*

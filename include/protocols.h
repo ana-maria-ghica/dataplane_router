@@ -16,9 +16,9 @@ struct arp_hdr {
 
 /* Ethernet frame header*/
 struct  ether_hdr {
-    uint8_t  ethr_dhost[6]; //adresa mac destinatie
-    uint8_t  ethr_shost[6]; //adresa mac sursa
-    uint16_t ethr_type;     // identificator protocol encapsulat
+    uint8_t  ethr_dhost[6]; // adresa mac destinatie
+    uint8_t  ethr_shost[6]; // adresa mac sursa
+    uint16_t ethr_type;     // identificator protocol encapsulat - adica IPv4 sau ARP
 };
 
 /* IP Header */
