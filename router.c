@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
-		// de aici incep verificarile partilor de header din antetul IPv4 ---------------------------- forward process
+		// de aici: verificarile partilor de header din antetul IPv4 ---------------------------- forward process
 
 		// TODO 1.1: verifica daca el e destinatia
 		// daca e destinatia, atunci face anumite lucruri
@@ -103,16 +103,39 @@ int main(int argc, char *argv[])
 			}
 
 			// TODO 1.4: cautare in tabela de rutare 
-			// cred ca e LPM
+			struct route_table_entry *best_route = longest_prefix_match(ip_header, route_table, route_table_len);
+			if (!best_route) {
+				printf("eroare la best route\n");
+				continue;
+			}
 
 			// TODO 1.5: actualizare checksum
 			ip_header->checksum = 0;
 			ip_header->checksum = checksum((uint16_t *)ip_header, sizeof(struct ip_hdr));
 
-			// TODO 1.6: rescriere adrese L2
+			// TODO 1.6: rescriere adrese L2 -> cele care tin de Ethernet !! => adresa mac
+
+			/*
+			adresa sursă va fi adresa interfeței routerului pe care pachetul e trimis mai departe, iar adresa destinație va fi adresa MAC a următorului hop. 
+			Pentru a determina adresa următorului hop, routerul folosește protocolul ARP.*/
+
+			// adresa sursa
+			get_interface_mac(best_route->interface, ether_header->ethr_shost);
+
+			// adresa destinatie
+			struct arp_table_entry * mac_entry = get_mac_entry(best_route->next_hop);
+			if (!mac_entry) {
+				pritnf("eroare la gasirea adresei MAC\n");
+				continue;
+			}
+			memcpy(ether_header->ethr_dhost, mac_entry->mac, 6);
+
 
 			// TODO 1.7: trimiterea noului pachet pe interfata corespunzatoare urmatorului hop
-			// apelez functia send_to_link + modific header-ul ethernet cu urmatorul hop determinat din ARP
+			send_to_link(best_route->interface, buf, len);
 		}
 	}
+
+	free(route_table);
+	free(arp_table);
 }
