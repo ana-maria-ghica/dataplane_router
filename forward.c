@@ -7,10 +7,10 @@
 // implementarea functiilor corespunzatoare Protocolului IPv4
 
 // LPM pe tabela de rutare
-struct route_table_entry *longest_prefix_match(struct ip_hdr ip_header, struct route_table_entry *route_table, int route_table_len) {
+struct route_table_entry *longest_prefix_match(struct ip_hdr* ip_header, struct route_table_entry *route_table, int route_table_len) {
     struct route_table_entry *best = NULL;
     for (int i = 0; i < route_table_len; i++) {
-        if ((ip_header.dest_addr & route_table[i].mask) == route_table[i].prefix) {
+        if ((ip_header->dest_addr & route_table[i].mask) == route_table[i].prefix) {
             if (best != NULL && route_table[i].mask > best->mask) {
                 best = &route_table[i];
             }

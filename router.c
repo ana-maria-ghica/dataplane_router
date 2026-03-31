@@ -1,8 +1,10 @@
 #include "protocols.h"
 #include "queue.h"
 #include "lib.h"
+#include "forward.h"
 #include <arpa/inet.h> 
 #include <stdbool.h>
+#include <string.h>
 
 /*
 intrebari: (1), (2)
@@ -40,7 +42,7 @@ int main(int argc, char *argv[])
 
 		interface = recv_from_any_link(buf, &len);
 		DIE(interface < 0, "recv_from_any_links");
-		printf("mi-a dat pachet!\n");
+		printf("mi-a dat, mi-a dat pachet!\n");
 
     // TODO: Implement the router forwarding logic
 
@@ -123,9 +125,9 @@ int main(int argc, char *argv[])
 			get_interface_mac(best_route->interface, ether_header->ethr_shost);
 
 			// adresa destinatie
-			struct arp_table_entry * mac_entry = get_mac_entry(best_route->next_hop);
+			struct arp_table_entry * mac_entry = get_mac_entry(best_route->next_hop, arp_table, arp_table_len);
 			if (!mac_entry) {
-				pritnf("eroare la gasirea adresei MAC\n");
+				printf("eroare la gasirea adresei MAC\n");
 				continue;
 			}
 			memcpy(ether_header->ethr_dhost, mac_entry->mac, 6);
