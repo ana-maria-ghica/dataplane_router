@@ -89,6 +89,10 @@ int main(int argc, char *argv[])
 				printf("checksum invalid, diferit de 0\n");
 				continue;
 			}
+			
+			// daca arata checksum gresit
+			// uint16_t csum = checksum((uint16_t *)ip_header, sizeof(struct ip_hdr));
+			// printf("checksum result: %d\n", csum);
 
 			// raspunde si router ul cu echo reply
 
@@ -153,13 +157,13 @@ int main(int argc, char *argv[])
 				send_to_link(len, buf, interface);
 				continue;
 			}
+			printf("am gasit ruta, trimit pe interfata %d\n", best_route->interface);
 
 			// TODO 1.5: actualizare checksum
 			ip_header->checksum = 0;
 			ip_header->checksum = checksum((uint16_t *)ip_header, sizeof(struct ip_hdr));
 
 			// TODO 1.6: rescriere adrese L2 -> cele care tin de Ethernet !! => adresa mac
-
 			/*
 			adresa sursă va fi adresa interfeței routerului pe care pachetul e trimis mai departe, iar adresa destinație va fi adresa MAC a următorului hop. 
 			Pentru a determina adresa următorului hop, routerul folosește protocolul ARP.*/
@@ -175,6 +179,7 @@ int main(int argc, char *argv[])
 			}
 			
 			memcpy(ether_header->ethr_dhost, mac_entry->mac, 6);
+			printf("am gasit MAC, trimit pachetul\n");
 
 			// TODO 1.7: trimiterea noului pachet pe interfata corespunzatoare urmatorului hop
 			printf("trimit pe interfata %d, next hop din tabela\n", best_route->interface);
