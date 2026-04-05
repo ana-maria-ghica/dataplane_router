@@ -5,12 +5,15 @@
 #include <arpa/inet.h> 
 #include <stdbool.h>
 #include <string.h>
+#include "trie.h"
 
 struct route_table_entry *route_table;
 int route_table_len;
 
 struct arp_table_entry *arp_table;
 int arp_table_len;
+
+struct trie *trie;
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +33,11 @@ int main(int argc, char *argv[])
 	// citesc tabela de rutare si tabela ARP
 	route_table_len = read_rtable(argv[1], route_table);
 	arp_table_len = parse_arp_table("arp_table.txt", arp_table);
-	
+
+	// aloc trie-ul
+	trie = init_trie();
+	DIE(trie == NULL, "route_table memory");
+	trie = create_trie(trie, route_table, route_table_len);
 
 	while (1) {
 		size_t interface;
@@ -182,7 +189,8 @@ int main(int argc, char *argv[])
 			}
 		
 			// TODO 1.4: LPM pe tabela de rutare + implementare ICMP [destination unreachable]
-			struct route_table_entry *best_route = longest_prefix_match(ip_header, route_table, route_table_len);
+			// struct route_table_entry *best_route = longest_prefix_match(ip_header, route_table, route_table_len);
+			struct route_table_entry *best_route = longest_prefix_match_trie(ip_header, trie);
 			if (!best_route) {
 				// implementeaza icmp
 				char original_datagram[sizeof(struct ip_hdr) + 8];
@@ -260,6 +268,7 @@ int main(int argc, char *argv[])
 
 	free(route_table);
 	free(arp_table);
+	destroy_trie(&trie);
 }
 
 /*

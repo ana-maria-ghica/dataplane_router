@@ -1,12 +1,116 @@
-Traceback (most recent call last):
-  File "/home/ana-maria-ghica/Facultate/an2/sem2/PCOM/teme/tema1/homework1-public/./checker/checker.py", line 77, in <module>
-    main()
-  File "/home/ana-maria-ghica/Facultate/an2/sem2/PCOM/teme/tema1/homework1-public/./checker/checker.py", line 71, in main
-    passive(args.host, args.testname)
-  File "/home/ana-maria-ghica/Facultate/an2/sem2/PCOM/teme/tema1/homework1-public/./checker/checker.py", line 38, in passive
-    status = fn(testname, packets)
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ana-maria-ghica/Facultate/an2/sem2/PCOM/teme/tema1/homework1-public/checker/tests.py", line 470, in host_unreachable_p
-    if ICMP not in packets[1]:
-                   ~~~~~~~^^^
-IndexError: list index out of range
+-- Excess packets:
+-- Packet
+###[ Ethernet ]### 
+  dst       = de:fe:c8:ed:00:00
+  src       = de:ad:be:ef:00:00
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0x0
+     len       = 20
+     id        = 1
+     flags     = 
+     frag      = 0
+     ttl       = 64
+     proto     = hopopt
+     chksum    = 0xb03e
+     src       = 192.168.0.2
+     dst       = 10.0.0.1
+     \options   \
+
+-- Packet
+###[ Ethernet ]### 
+  dst       = de:ad:be:ef:00:00
+  src       = de:fe:c8:ed:00:00
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0x0
+     len       = 56
+     id        = 1
+     flags     = 
+     frag      = 0
+     ttl       = 64
+     proto     = hopopt
+     chksum    = 0xf971
+     src       = 192.168.0.1
+     dst       = 192.168.0.2
+     \options   \
+###[ Raw ]### 
+        load      = '\x03\x00.\\xa4\x00\x00\x00\x00E\x00\x00\x14\x00\x01\x00\x00?\x00\x00\x00\\xc0\\xa8\x00\x02\n\x00\x00\x01\\xbe\\xef\x00\x00\\xc0\\xa8\x00\x02'
+
+-- Packet
+###[ Ethernet ]### 
+  dst       = de:fe:c8:ed:00:00
+  src       = de:ad:be:ef:00:00
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0xc0
+     len       = 84
+     id        = 6840
+     flags     = 
+     frag      = 0
+     ttl       = 64
+     proto     = icmp
+     chksum    = 0xdddd
+     src       = 192.168.0.2
+     dst       = 192.168.0.1
+     \options   \
+###[ ICMP ]### 
+        type      = dest-unreach
+        code      = protocol-unreachable
+        chksum    = 0xfcfd
+        reserved  = 0
+        length    = 0
+        nexthopmtu= 0
+        unused    = ''
+###[ IP in ICMP ]### 
+           version   = 4
+           ihl       = 5
+           tos       = 0x0
+           len       = 56
+           id        = 1
+           flags     = 
+           frag      = 0
+           ttl       = 64
+           proto     = hopopt
+           chksum    = 0xf971
+           src       = 192.168.0.1
+           dst       = 192.168.0.2
+           \options   \
+###[ Raw ]### 
+              load      = '\x03\x00.\\xa4\x00\x00\x00\x00E\x00\x00\x14\x00\x01\x00\x00?\x00\x00\x00\\xc0\\xa8\x00\x02\n\x00\x00\x01\\xbe\\xef\x00\x00\\xc0\\xa8\x00\x02'
+
+-- Packet
+###[ Ethernet ]### 
+  dst       = de:ad:be:ef:00:00
+  src       = de:fe:c8:ed:00:00
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0xc0
+     len       = 84
+     id        = 6840
+     flags     = 
+     frag      = 0
+     ttl       = 64
+     proto     = icmp
+     chksum    = 0xdddd
+     src       = 192.168.0.1
+     dst       = 192.168.0.2
+     \options   \
+###[ ICMP ]### 
+        type      = echo-reply
+        code      = 0
+        chksum    = 0x0
+        id        = 0x0
+        seq       = 0x0
+        unused    = ''
+###[ Raw ]### 
+           load      = 'E\x00\x008\x00\x01\x00\x00@\x00\\xf9q\\xc0\\xa8\x00\x01\\xc0\\xa8\x00\x02\x03\x00.\\xa4\x00\x00\x00\x00E\x00\x00\x14\x00\x01\x00\x00?\x00\x00\x00\\xc0\\xa8\x00\x02\n\x00\x00\x01\\xbe\\xef\x00\x00\\xc0\\xa8\x00\x02'
+
