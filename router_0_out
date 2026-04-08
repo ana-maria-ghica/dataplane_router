@@ -1,105 +1,235 @@
 Setting up interface: rr-0-1
 Setting up interface: r-0
 Setting up interface: r-1
+
 Packet received
--- nu sunt eu destinatia --
+
 Packet received
-Packet type not IPv4
+Forward to another router
+
 Packet received
-Packet type not IPv4
+ARP reply received from 192.168.1.2
+
 Packet received
-mi-a dat, mi-a dat pachet!
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+ARP reply received from 192.168.0.2
+
 Packet received
-mi-a dat, mi-a dat pachet!
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
-mi-a dat, mi-a dat pachet!
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
-mi-a dat, mi-a dat pachet!
+Forward to another router
+
 Packet received
-Packet type not IPv4
+Forward to another router
+
 Packet received
-Packet type not IPv4
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+
 Packet received
-mi-a dat, mi-a dat pachet!
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+
+Packet received
+Forward to another router
 Invalid checksum
-recv_checksum: 100, calc_checksum: 94f8
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
-mi-a dat, mi-a dat pachet!
+ARP reply received from 192.0.1.2
+
 Packet received
-Packet type not IPv4
+ARP reply received from 192.0.1.2
+
 Packet received
-Packet type not IPv4
+
 Packet received
--- nu sunt eu destinatia --
+Packet is not for me
+
 Packet received
-Packet type not IPv4
+Forward to another router
+
 Packet received
-Packet type not IPv4
+Forward to another router
+
 Packet received
-mi-a dat, mi-a dat pachet!
+Forward to another router
+
 Packet received
-mi-a dat, mi-a dat pachet!
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
-mi-a dat, mi-a dat pachet!
+Forward to another router
+
 Packet received
-Packet type not IPv4
+Forward to another router
+
 Packet received
-Packet type not IPv4
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+
 Packet received
-mi-a dat, mi-a dat pachet!
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+
 Packet received
--- nu sunt eu destinatia --
+My router is the destination
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
 Packet received
--- nu sunt eu destinatia --
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router
+
+Packet received
+Forward to another router

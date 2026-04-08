@@ -2,6 +2,7 @@
 #include "trie.h"
 #include "queue.h"
 #include "lib.h"
+#include <arpa/inet.h> 
 
 
 struct trie* init_trie() {
@@ -45,8 +46,8 @@ int count_bits(uint32_t mask) {
 
 struct trie* add_node(struct trie* root, struct route_table_entry* route_table_entry) {
     
-    uint32_t prefix = route_table_entry->prefix;
-    uint32_t mask = route_table_entry->mask;
+    uint32_t prefix = ntohl(route_table_entry->prefix);
+    uint32_t mask = ntohl(route_table_entry->mask);
     int num_bits = 32 - count_bits(mask); // ca sa vad cati biti are rost sa parcurg din prefix
 
     if (root == NULL) {

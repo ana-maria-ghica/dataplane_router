@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include <stdint.h>
+#include <lib.h>
 
 /* Ethernet ARP packet from RFC 826 */
 struct arp_hdr {
@@ -58,6 +59,11 @@ struct icmp_hdr
       uint16_t        mtu;
     } frag_t;                        /* Nu este relevant pentru tema */
   } un_t;
+};
+
+struct queue_node {
+  char* buf;
+  int buf_length;
 };
 
 #endif

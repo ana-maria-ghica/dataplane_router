@@ -9,7 +9,10 @@
 #define MAX_PACKET_LEN 1400
 #define ROUTER_NUM_INTERFACES 3
 #define ETHERTYPE_IP 0x0800	/* IP protocol */
-
+#define ETHERTYPE_ARP 0x0806 /* ARP protocol */
+#define MAX_TABLE_ENTRIES 80000
+#define ARP_CACHE_MAX_DIM 10000
+// #define BROADCAST_ADDR {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}
 
 /*
  * @brief Sends a packet on a specific interface.

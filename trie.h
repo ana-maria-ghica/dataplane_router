@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include "lib.h"
+#include <arpa/inet.h> 
 
 struct trie {
   uint8_t bit;
