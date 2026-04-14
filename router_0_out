@@ -88,6 +88,8 @@ Packet received
 Forward to another router
 
 Packet received
+
+Packet received
 Forward to another router
 
 Packet received
@@ -108,9 +110,11 @@ My router is the destination
 
 Packet received
 Forward to another router
+Time limit exceeded
 
 Packet received
 Forward to another router
+Destination unreachable
 
 Packet received
 Forward to another router

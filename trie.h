@@ -5,11 +5,13 @@
 #include <stdint.h>
 #include "lib.h"
 #include <arpa/inet.h> 
+#include <stdbool.h>
 
 struct trie {
   uint8_t bit;
   struct trie* left;
   struct trie* right;
+  bool valid_prefix;
   struct route_table_entry* rtable_entry;
 };
 

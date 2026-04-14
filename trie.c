@@ -86,8 +86,10 @@ struct trie* add_node(struct trie* root, struct route_table_entry* route_table_e
             }
         }
 
+        // setez ca am creat un prefix valid
         // la final de prefix, salvez datele din tabela de rutare, care ma ajuta la LPM
         if (i == num_bits) {
+            iter->valid_prefix = true;
             iter->rtable_entry = route_table_entry;
         }
     }

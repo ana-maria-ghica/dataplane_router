@@ -29,11 +29,11 @@ int main(int argc, char *argv[])
 	route_table = malloc(sizeof(struct route_table_entry) * MAX_TABLE_ENTRIES);
 	DIE(route_table == NULL, "route_table memory");
 
-	// aloc tabela ARP
+	// aloc tabela statica ARP
 	arp_table = malloc(sizeof(struct arp_table_entry) * MAX_TABLE_ENTRIES);
 	DIE(arp_table == NULL, "arp_table memory");
 
-	// citesc tabela de rutare si tabela ARP
+	// citesc tabela de rutare (si tabela statica ARP)
 	route_table_len = read_rtable(argv[1], route_table);
 	// arp_table_len = parse_arp_table("arp_table.txt", arp_table);
 
@@ -50,6 +50,7 @@ int main(int argc, char *argv[])
 	// initializez coada pentru pachete, daca e nevoie sa le salvez
 	queue queue = create_queue();
 	int queue_size = 0;
+	int seq_nr = 0;
 
 	while (1) {
 		size_t interface;
@@ -148,7 +149,7 @@ int main(int argc, char *argv[])
 
 				// TODO IP.3: verific si actualizez TTL
 				if (ip_header->ttl <= 1) {
-
+					printf("Time limit exceeded\n");
 					// inseamna ca pachetul a expirat si trimit ICMP (time exceeded)
 					struct icmp_hdr* icmp_header = (struct icmp_hdr*)(buf + sizeof(struct ether_hdr) + sizeof(struct ip_hdr));
 					icmp_header->mtype = 11;
@@ -200,6 +201,7 @@ int main(int argc, char *argv[])
 				// struct route_table_entry *best_route = longest_prefix_match(ip_header, route_table, route_table_len);
 				struct route_table_entry *best_route = longest_prefix_match_trie(ip_header, trie);
 				if (!best_route) {
+					printf("Destination unreachable\n");
 					// implementeaza icmp
 					struct icmp_hdr* icmp_header = (struct icmp_hdr*)(buf + sizeof(struct ether_hdr) + sizeof(struct ip_hdr));
 					icmp_header->mtype = 3;
@@ -256,10 +258,13 @@ int main(int argc, char *argv[])
 					// memcpy(buf_copy, buf, len);
 
 					// trebuie sa stochez (buf, len_buf) ca atunci cand prelucrez pachete, sa stiu care e dimensiunea corespunzatoare pachetului curent
-					struct queue_node* q_node = malloc(sizeof(struct queue_node));
+					Node* q_node = malloc(sizeof(Node));
 					q_node->buf = malloc(sizeof(char) * MAX_PACKET_LEN);
 					memcpy(q_node->buf, buf, len);
 					q_node->buf_length = len;
+
+					q_node->seq_number = seq_nr;
+					seq_nr++;
 
 					queue_enq(queue, q_node);
 					queue_size++;
@@ -292,15 +297,14 @@ int main(int argc, char *argv[])
 				arp_header->opcode = htons(2);
 
 				// swap intre ip sender si target
-                uint32_t aux = arp_header->sprotoa;
-                arp_header->sprotoa = arp_header->tprotoa;
-                arp_header->tprotoa = aux;
+				uint32_t aux = arp_header->tprotoa;
+				arp_header->tprotoa = arp_header->sprotoa;
+				arp_header->sprotoa = aux;
 
 				// setez adresele hw de sender si target
 				memcpy(arp_header->thwa, arp_header->shwa, 6);
 				get_interface_mac(interface, arp_header->shwa);
 				
-
 				// setez adresele mac: 
 				memcpy(ether_header->ethr_dhost, ether_header->ethr_shost, 6);
 				get_interface_mac(interface, ether_header->ethr_shost);

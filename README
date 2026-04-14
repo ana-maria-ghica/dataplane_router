@@ -23,3 +23,28 @@ De aici, daca a trecut verificarile, logica programului se imparte in 2 (dupa ti
       -interschimb adresele IP (source, target), setez adresele MAC si trimit pachetul inapoi de unde a venit
     -daca e pachet ARP Reply:
       -salvez adresa MAC primita in ARP cache, caut in fiecare pachet din coada daca MAC-ul primit corespunde cu adresa next_hop-ului la care trebuie sa mearga, daca adresele corespund atunci actualizez header-ul Ethernet si trimit pachetul (daca adresele nu corespund, doar adaug pachetul inapoi in coada si continui verificarile; am grija sa nu ciclez la infinit in coada, de asta verific doar un nr finit de pachete, egal cu dimensiunea cozii)
+
+
+**Problema intampinata si rezolvarea ei:**
+Atunci cand scoteam pachetele din coada, si le forwardam in retea, aveam nevoie atat de bufferul cu pachetul in sine cat si de dimensiunea lui (parametrii necesari pentru apelul send_to_link(q_node->buf_length, q_node->buf, best_route->interface)). 
+De aceea, am creat un struct queue_node:
+
+typedef struct queue_node {
+  char* buf;
+  int buf_length;
+  int seq_number;
+}Node;
+
+care are rolul de a stoca atat buf cat si buf_length. El reprezinta in sine un nod in coada (nu doar "buf" ca nod, asa cum ma gandisem initial) tocmai pentur a stoca mai multe informatii pentru pachet. 
+
+
+**Explicatii screenshot-uri:**
+-Screenshot (1): Forward
+Am testat functionalitatea de forward pentru comanda ping. Din captura Wireshark se remarca pachetele Reply si Request si tipul de pachete (ICMP)
+
+-Screenshot (2): ARP Request
+Am testat comanda "arping -c 4 h2" de pe h0, iar in captura Wireshark apar "Who has 192.168.1.2" (adresa ip pentru h2) si "Tell 192.168.0.2" (adresa ip pentru h0), pentru ca h0 face request-ul catre h2
+
+-Screenshot (3): ICMP ttl si ICMP destination unreachable
+Am testat prima data pentru "dest unreachable", dand comanda ping pe o adresa ip care nu exista by default in networkul implementat in tema
+Apoi, am testat "ttl" punand conditia in comanda, ca pachetul trimis sa aiba ttl=1, tocmai pentru a vedea rezultatul

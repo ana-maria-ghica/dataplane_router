@@ -24,7 +24,7 @@ struct route_table_entry *longest_prefix_match(struct ip_hdr* ip_header, struct 
 }
 
 
-// // LPM - implementat folosind trie
+// LPM - implementat folosind trie
 struct route_table_entry* longest_prefix_match_trie(struct ip_hdr* ip_header, struct trie *trie) {
 
     struct route_table_entry *best_route = NULL;
@@ -56,6 +56,9 @@ struct route_table_entry* longest_prefix_match_trie(struct ip_hdr* ip_header, st
     }
     return best_route;
 }
+
+
+// implementarea functiilor corespunzatoare Protocolului ARP
 
 // Get mac entry - pe protocolul ARP
 struct arp_table_entry* get_mac_entry(uint32_t current_ip_address, struct arp_table_entry *arp_table, int arp_table_len) {

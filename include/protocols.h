@@ -61,9 +61,10 @@ struct icmp_hdr
   } un_t;
 };
 
-struct queue_node {
+typedef struct queue_node {
   char* buf;
   int buf_length;
-};
+  int seq_number;
+}Node;
 
 #endif
