@@ -1,2 +1,8 @@
 .vscode
 
+*.o
+router
+router_*
+hosts_output/
+__pycache__/
+*.zip
